@@ -9,7 +9,6 @@ require("dotenv").config()
 
 const app = express()
 const path = require("path")
-const arr = require("./statics/data")
 const HTTP_PORT = process.env.PORT || 8000
 
 app.use(express.static(path.join(__dirname, "statics")))
