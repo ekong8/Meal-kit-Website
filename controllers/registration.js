@@ -58,8 +58,75 @@ router.post("/", (req, res) => {
       to: `${username}`,
       from: "ekong8@myseneca.ca",
       subject: "Welcome to K-Food!",
-      html: `<strong>Hello, ${firstName} ${lastName}: </strong><br>
-      <p>You have been registered to K-Food! Your username is ${username}. Thank you!</p>`,
+      html: `<!DOCTYPE html>
+      <html>
+      <head>
+      <style>
+      body {
+        --primary: #0275d8;
+        --success: #5cb85c;
+        --info: #5bc0de;
+        --warning: #f0ad4e;
+        --danger: #d9534f;
+        --dark: #292b2c;
+        --light: #f7f7f7;
+      }
+      
+      .mail-content{
+         border: 1.5px solid lightgray;
+         border-radius: 5px;
+      }
+      .mail-title {
+        font-family: Arial;
+        text-align: center;
+        color: var(--success);
+      }
+      
+       .mail-head {
+        font-family: Arial;
+        font-size: 20px;
+        text-align: center;
+        color: darkgray;
+      }
+
+      .mail-text{
+        color: lightgray;
+        font-family: Arial;
+        text-align: center;
+      }
+      
+      .mail-btn {
+        display: block;
+        padding: 8px 12px;
+        background-color: var(--success);
+        border-radius: 4px;
+        color: var(--light);
+        text-decoration: none;
+        font-family: Arial;
+        font-size: 18px;
+        font-weight: bold;
+        margin: 10px auto;
+        max-width: fit-content;
+      }
+      
+      .mail-btn:hover {
+        filter: brightness(0.8);
+      }
+      </style>
+      </head>
+      <body>
+      <h1 class="mail-title">
+      Thanks for Join with K-Food!
+      </h1>
+      <div class="mail-content">
+      <h3 class="mail-head">Hello, ${firstName} ${lastName} </h3><br>
+      <p class="mail-text">You have been registered to K-Food! Your username is ${username}. <br><br>Thank you!</p>
+      <a class="mail-btn" href="https://ekong8.herokuapp.com/">
+        Start Now
+      </a>
+       </div>
+      </body>
+      </html>`,
     }
     sgMail
       .send(msg)
