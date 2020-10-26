@@ -1,0 +1,74 @@
+.title h2 {
+  font-size: 2em;
+  font-family: "Roboto Mono", monospace;
+  color: rgba(160, 44, 44, 0.788);
+  font-weight: bold;
+  background-color: rgba(255, 159, 142, 0.295);
+  opacity: 0.7;
+}
+
+.heading h2 {
+  font-family: "Roboto Mono", monospace;
+}
+
+.menu {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+.menu h2 {
+  font-size: 3em;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+}
+
+.menu .meals-box {
+  width: 400px;
+  height: 400px;
+  margin: 10px 0;
+}
+
+.meals-box img {
+  width: 390px;
+  height: 225px;
+  padding: 10px;
+}
+
+main {
+  width: 60%;
+  margin: 10px auto;
+}
+
+.meals-box h3,
+.meals-box h4 {
+  font-size: 1.3em;
+  font-family: "Monserrat", sans-serif;
+}
+
+.meals-box h3 {
+  color: #520b4c;
+  padding: 10px 0;
+}
+
+.meals-box h4 {
+  color: #e96969e7;
+}
+
+.meals-box p {
+  padding: 5px;
+  font-family: "Monserrat", sans-serif;
+  font-size: 1.1em;
+}
+
+@media screen and (max-width: 480px) {
+  * {
+    flex: 100%;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  * {
+    flex: 100%;
+  }
+}

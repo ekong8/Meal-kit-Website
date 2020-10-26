@@ -1,0 +1,39 @@
+<main>
+    <div class="title">
+        <h2>Classic Menu</h2>
+    </div>
+    <div class="menu">
+        {{#each data}}
+        {{#unless IsItaTopMeal}}
+        {{#if categoryBoolen}}
+        <div class="meals-box">
+            <img src="{{img}}" alt="">
+            <h3>{{name}}</h3>
+            <h4>{{price}}</h4>
+            <p>{{WhatIsIncluded}}</p>
+        </div>
+        {{/if}}
+        {{/unless}}
+        {{/each}}
+    </div>
+    <div class="title">
+        <h2>Easy Prep Meals</h2>
+    </div>
+    <div class="menu">
+        {{#each data}}
+        {{#unless IsItaTopMeal}}
+        {{#unless categoryBoolen}}
+        <div class="meals-box">
+            <img src="{{img}}" alt="">
+            <h3>{{name}}</h3>
+            <h4>{{price}}</h4>
+            <p>{{WhatIsIncluded}}</p>
+        </div>
+        {{/unless}}
+        {{/unless}}
+        {{/each}}
+    </div>
+    </div>
+
+
+</main>

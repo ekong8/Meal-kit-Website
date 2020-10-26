@@ -1,0 +1,45 @@
+<main>
+    <h1 id="learn">How it works?</h1>
+    <div class="content">
+        <div class="box">
+            <img src="https://www.doofood.com/assets/shared/images/doofood_work_images/Feb201821/oShQ94IeUjDLgEa.jpg"
+                alt="image1">
+            <p>
+                Choose delivery date & recipe from the menu page
+            </p>
+        </div>
+
+        <div class="box">
+            <img src="https://www.doofood.com/assets/shared/images/doofood_work_images/Feb201821/fB7Fbm5xKAa1lvH.jpg"
+                alt="image2">
+            <p>
+                Prepped ingredients and recipes are delivered to your doorstep
+            </p>
+        </div>
+        <div class="box">
+            <img src="https://www.doofood.com/assets/shared/images/doofood_work_images/Feb201821/oD6dn5aw3zK0TrP.jpg"
+                alt="image3">
+            <p>
+                Food made from scratch so you can enjoy with your family!
+            </p>
+        </div>
+    </div>
+    <a href="#topMeal"><button>Order now</button></a>
+</main>
+<div class="top-meal">
+    <h1 id="topMeal">K-Food Best Packages</h1>
+    <div class="top-meal-menu">
+        {{#each data}}
+        {{#if IsItaTopMeal}}
+        <div class="meals-box">
+            <img src="{{img}}" alt="">
+            <h3>{{name}}</h3>
+            <h4>{{price}}</h4>
+            <p>{{WhatIsIncluded}}</p>
+        </div>
+        {{/if}}
+        {{/each}}
+    </div>
+    <a href="/menu"><button>K-Food all Menu</button></a>
+</div>
+<div class="btm-cta"></div>

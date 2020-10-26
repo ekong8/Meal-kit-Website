@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/registration.css">
+<div class="page-content">
+    <form class="signup-form"  action="/registration" method="post">
+        <h3>Sign-up</h3>
+        <br>
+        <hr>
+        <div class="input-group">
+            <label for="name">Name</label>
+            <div id="name" class="row-col-2">
+                <input name="firstName" type="text" placeholder="First Name" value="{{firstName}}" />
+                <input name="lastName" type="text" placeholder="Last Name" value="{{lastName}}" />
+                </div>
+                <div class=>
+                    {{#each errors.fName}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                    {{#each errors.lName}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+
+
+            <div class="input-group">
+                <label for="username">User Name</label>
+                <div class="row-col-1">
+                    <input name="username" type="email" placeholder="example@gmail.com" value="{{username}}" />
+                    <div>
+                        {{#each errors.username}}
+                        <div class="login-vdt">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="row-col-1">
+                    <input name="password" type="password" placeholder="Password" value="{{password}}" />
+                    <div>
+                        {{#each errors.password}}
+                        <div class="login-vdt">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="passwordConfirm">Password Confirm</label>
+                <div class="row-col-1">
+                    <input name="passwordConfirm" type="password" placeholder="Password Confirm"
+                        value="{{passwordConfirm}}" />
+                    <div>
+                        {{#each errors.passwordConfirm}}
+                        <div class="login-vdt">{{this}}</div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div class="row-col-1">
+                <input type="submit" class="btn-primary" value="Sign Up" />
+            </div>
+    </form>
+</div>
