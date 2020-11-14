@@ -5,11 +5,12 @@
 const express = require("express")
 const handlebar = require("express-handlebars")
 const bodyparser = require("body-parser")
-require("dotenv").config()
+const dotenv = require("dotenv")
+dotenv.config({ path: "./config/.env" })
 
 const app = express()
 const path = require("path")
-const HTTP_PORT = process.env.PORT || 8000
+const HTTP_PORT = process.env.PORT
 
 app.use(express.static(path.join(__dirname, "statics")))
 //set up body parser

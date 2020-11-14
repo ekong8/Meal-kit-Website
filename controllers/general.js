@@ -1,16 +1,16 @@
 const express = require("express")
 const router = express.Router()
-var data = require("../statics/data")
+const data = require("../models/data.js")
 
 router.get("/", (req, res) => {
   res.render("general/home", {
-    data: data.packages,
+    data: data.getAllData(),
   })
 })
 
 router.get("/menu", (req, res) => {
   res.render("general/menu", {
-    data: data.packages,
+    data: data.getAllData(),
   })
 })
 
