@@ -5,6 +5,16 @@
       <h3>Sign-In</h3>
       <br>
       <hr>
+       {{#if errors.other}}
+        <br>
+        <ul style="padding: 0 32px">
+            {{#each errors.other}}
+            <li style="color: red; width:auto">{{this}}</li>
+            {{/each}}
+        </ul>
+        <br>
+        <hr>
+        {{/if}}
       <div class="input-group">
         <div class="row-col-1">
           <label for="username">User Name</label>
