@@ -14,7 +14,6 @@
 }
 
 li,
-a,
 button {
   font-family: "Monserrat", sans-serif;
   font-weight: 500;
@@ -22,6 +21,13 @@ button {
   color: #edf0f1;
   text-decoration: none;
   width: 110px;
+}
+
+.dash-name {
+  text-decoration: none;
+  color: gray;
+  font-family: "Monserrat", sans-serif;
+  margin-right: 30px;
 }
 
 header {
@@ -62,6 +68,7 @@ header {
 .nav-links li a {
   color: #e96969e7;
   transition: all 0.3s ease 0s;
+  text-decoration: none;
 }
 
 .nav-links li a:hover {
@@ -307,6 +314,7 @@ footer .footer {
 
 .footer a {
   color: gray;
+  text-decoration: none;
 }
 
 footer input {

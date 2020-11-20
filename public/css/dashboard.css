@@ -1,0 +1,28 @@
+.dashboard {
+  text-align: center;
+  border: 1.5px solid lightgray;
+  border-radius: 5px;
+  margin: 100px auto;
+  width: 700px;
+}
+
+.dashboard button {
+  padding: 9px 25px;
+  margin: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #f7adade7;
+  font-family: "Monserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+  width: 250px;
+}
+
+.dashboard h2 {
+  font-family: "Roboto Mono", monospace;
+  font-weight: bolder;
+  color: #e96969e7;
+}
