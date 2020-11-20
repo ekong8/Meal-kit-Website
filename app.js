@@ -12,9 +12,8 @@ const dotenv = require("dotenv")
 dotenv.config({ path: "./config/.env" })
 
 const app = express()
-const path = require("path")
 
-app.use(express.static(path.join(__dirname, "statics")))
+app.use(express.static("public"))
 //set up body parser
 app.use(bodyparser.urlencoded({ extended: true }))
 //set up handlebars

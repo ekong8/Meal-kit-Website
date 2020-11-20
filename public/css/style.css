@@ -95,7 +95,7 @@ button:hover {
 }
 
 .hero {
-  background: url("img/bibimbab.webp") center center;
+  background: url("/img/bibimbab.webp") center center;
   margin-top: 65px;
   background-repeat: no-repeat;
   background-size: cover;

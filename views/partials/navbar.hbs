@@ -8,11 +8,11 @@
     </nav>
     <div>
         {{#if user}}
-        <a href="/logout"><button class="btn2">Logout</button></a>
-        <a href="/dash"><button class="btn2">My page</button></a>
+        <a href="/user/dash">Hello, {{user.firstName}} {{user.lastName}}</a>
+        <a href="/user/logout"><button class="btn2">Logout</button></a>
         {{else}}
-        <a href="/registration"><button>Sign Up</button></a>
-        <a href="/login"><button class="btn2">Login</button></a>
+        <a href="/user/registration"><button>Sign Up</button></a>
+        <a href="/user/login"><button class="btn2">Login</button></a>
         {{/if}}
     </div>
 </header>

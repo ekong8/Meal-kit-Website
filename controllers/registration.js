@@ -1,14 +1,13 @@
 const express = require("express")
 const userModel = require("../models/User")
 const router = express.Router()
-const bcrypt = require("bcryptjs")
 
 //registeration
-router.get("/", (req, res) => {
-  res.render("account/registration", {})
+router.get("/registration", (req, res) => {
+  res.render("user/registration", {})
 })
 
-router.post("/", async (req, res) => {
+router.post("/registration", async (req, res) => {
   const { firstName, lastName, username, password, passwordConfirm } = req.body
   const errors = {
     fName: [],
@@ -67,16 +66,15 @@ router.post("/", async (req, res) => {
     const foundUser = await userModel.findOne({ username: req.body.username })
     if (foundUser !== null) {
       errors.other.push("Duplicate username!")
-    }
-
-    if (Object.values(errors).every((arr) => arr.length == 0)) {
-      const sgMail = require("@sendgrid/mail")
-      sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-      const msg = {
-        to: `${username}`,
-        from: "ekong8@myseneca.ca",
-        subject: "Welcome to K-Food!",
-        html: `<!DOCTYPE html>
+    } else {
+      if (Object.values(errors).every((arr) => arr.length == 0)) {
+        const sgMail = require("@sendgrid/mail")
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        const msg = {
+          to: `${username}`,
+          from: "ekong8@myseneca.ca",
+          subject: "Welcome to K-Food!",
+          html: `<!DOCTYPE html>
                   <html>
                     <head>
                       <style>
@@ -145,20 +143,21 @@ router.post("/", async (req, res) => {
                          </div>
                         </body>
                         </html>`,
+        }
+        await sgMail.send(msg)
+        res.render("general/welcome", {})
+      } else {
+        res.render("user/registration", {
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          errors,
+        })
       }
-      await sgMail.send(msg)
-      res.render("general/welcome", {})
-    } else {
-      res.render("account/registration", {
-        firstName: firstName,
-        lastName: lastName,
-        username: username,
-        errors,
-      })
     }
   } catch (err) {
     errors.other.push(err)
-    res.render("account/registration", {
+    res.render("user/registration", {
       errors,
     })
   }

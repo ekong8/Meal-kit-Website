@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="/login.css">
+<link rel="stylesheet" href="/css/login.css">
 <div class="page-content">
   <form action="/login" method="post">
     <div class="login-form">
       <h3>Sign-In</h3>
       <br>
       <hr>
-       {{#if errors.other}}
+       {{#if errors.others}}
         <br>
         <ul style="padding: 0 32px">
-            {{#each errors.other}}
+            {{#each errors.others}}
             <li style="color: red; width:auto">{{this}}</li>
             {{/each}}
         </ul>
@@ -38,7 +38,7 @@
         <input type="submit" class="btn-primary" value="Login" />
       </div>
       <div class="signIn">
-        <p>Don't have an account? <a href="/registration">Sign-up</a></p>
+        <p>Don't have an user? <a href="/registration">Sign-up</a></p>
       </div>
   </form>
 </div>
