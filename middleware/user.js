@@ -1,4 +1,4 @@
-const users = (req, res, next) => {
+const isLoggedIn = (req, res, next) => {
   if (req.session.user) {
     next()
   } else {
@@ -6,4 +6,24 @@ const users = (req, res, next) => {
   }
 }
 
-module.exports = users
+const isLoggedOut = (req, res, next) => {
+  if (req.session.user) {
+    res.redirect("/")
+  } else {
+    next()
+  }
+}
+
+const isAdmin = (req, res, next) => {
+  if (req.session.user && req.session.user.isClerk) {
+    next()
+  } else {
+    res.redirect("/")
+  }
+}
+
+module.exports = {
+  isLoggedIn,
+  isLoggedOut,
+  isAdmin,
+}

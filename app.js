@@ -3,10 +3,11 @@
 // Section: NAA
 
 const express = require("express")
-const handlebar = require("express-handlebars")
-const bodyparser = require("body-parser")
+const exphbs = require("express-handlebars")
+const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const session = require("express-session")
+
 //set up dotenv
 const dotenv = require("dotenv")
 dotenv.config({ path: "./config/.env" })
@@ -15,18 +16,28 @@ const app = express()
 
 app.use(express.static("public"))
 //set up body parser
-app.use(bodyparser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
+
 //set up handlebars
-app.engine(".hbs", handlebar({ extname: ".hbs" }))
+app.engine(
+  ".hbs",
+  exphbs({
+    extname: ".hbs",
+    defaultLayout: "main",
+  })
+)
+
 app.set("view engine", ".hbs")
+
 //set up session
 app.use(
   session({
-    secret: `${process.env.SECRET_KEY}`,
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: true,
   })
 )
+
 app.use((req, res, next) => {
   res.locals.user = req.session.user
   next()
@@ -47,13 +58,15 @@ mongoose
   })
 
 //set up router
-const generalController = require("./controllers/general")
-const loginController = require("./controllers/login")
-const registrationController = require("./controllers/registration")
+const generalRoute = require("./controllers/general")
+const userRoute = require("./controllers/user")
+//const loginRoute = require("./controllers/login")
+//const registrationRoute = require("./controllers/registration")
 
-app.use("/", generalController)
-app.use("/login", loginController)
-app.use("/registration", registrationController)
+app.use("/", generalRoute)
+app.use("/user", userRoute)
+//app.use("/login", loginRoute)
+//app.use("/registration", registrationRoute)
 
 //set up PORT
 const HTTP_PORT = process.env.PORT

@@ -21,6 +21,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  createdData: {
+    type: Date,
+    default: Date.now(),
+  },
   isClerk: {
     type: Boolean,
     default: false,
