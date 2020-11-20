@@ -21,7 +21,7 @@ router.post("/registration", isLoggedOut, (req, res) => {
     passwordConfirm: [],
     other: [],
   }
-
+  //validation
   function pwdValidate(str) {
     const pwdFormat = new RegExp(/^[0-9a-zA-Z]{6,12}$/)
     return pwdFormat.test(str)
@@ -56,7 +56,7 @@ router.post("/registration", isLoggedOut, (req, res) => {
   if (password != passwordConfirm) {
     errors.passwordConfirm.push("Password is not the same.")
   }
-
+  //check for username
   userModel
     .findOne({ username: req.body.username })
     .then((user) => {
@@ -72,6 +72,7 @@ router.post("/registration", isLoggedOut, (req, res) => {
     .catch((err) => {
       console.log(err)
     })
+
   if (Object.values(errors).every((arr) => arr.length == 0)) {
     const user = new userModel({
       firstName: req.body.firstName,
@@ -82,6 +83,7 @@ router.post("/registration", isLoggedOut, (req, res) => {
     user
       .save()
       .then(() => {
+        //send email
         const sgMail = require("@sendgrid/mail")
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
         const msg = {
@@ -190,6 +192,7 @@ router.post("/login", isLoggedOut, (req, res) => {
     password: [],
     others: [],
   }
+  //validation
   if (username == "") {
     errors.username.push("You must enter an user name.")
   }
@@ -202,6 +205,7 @@ router.post("/login", isLoggedOut, (req, res) => {
         username: req.body.username,
       })
       .then((user) => {
+        //matching email and password
         if (user === null) {
           errors.others.push("Sorry your username or password was not correct!")
           res.render("user/login", {
@@ -240,11 +244,13 @@ router.post("/login", isLoggedOut, (req, res) => {
   }
 })
 
+//logout
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy()
   res.redirect("/user/login")
 })
 
+//dashboard
 router.get("/dashboard", isLoggedIn, (req, res) => {
   if (req.session.user.isClerk) {
     res.redirect("/user/dashboard/admin")

@@ -60,13 +60,9 @@ mongoose
 //set up router
 const generalRoute = require("./controllers/general")
 const userRoute = require("./controllers/user")
-//const loginRoute = require("./controllers/login")
-//const registrationRoute = require("./controllers/registration")
 
 app.use("/", generalRoute)
 app.use("/user", userRoute)
-//app.use("/login", loginRoute)
-//app.use("/registration", registrationRoute)
 
 //set up PORT
 const HTTP_PORT = process.env.PORT
