@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //set up action path
 app.use(
   methodOverride("_method", {
-    mmethods: ["GET", "POST"],
+    methods: ["GET", "POST"],
   })
 )
 
