@@ -29,15 +29,13 @@
 <div class="top-meal">
     <h1 id="topMeal">K-Food Best Packages</h1>
     <div class="top-meal-menu">
-        {{#each data}}
-        {{#if IsItaTopMeal}}
+        {{#each meals}}
         <div class="meals-box">
-            <img src="{{img}}" alt="">
+            <img src="/uploads/{{pic}}" alt="">
             <h3>{{name}}</h3>
             <h4>{{price}}</h4>
-            <p>{{WhatIsIncluded}}</p>
+            <p>{{included}}</p>
         </div>
-        {{/if}}
         {{/each}}
     </div>
     <a href="/menu"><button>K-Food all Menu</button></a>

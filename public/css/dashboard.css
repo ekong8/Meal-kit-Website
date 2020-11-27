@@ -3,12 +3,12 @@
   border: 1.5px solid lightgray;
   border-radius: 5px;
   margin: 100px auto;
-  width: 700px;
+  width: 95%;
 }
 
 .dashboard button {
-  padding: 9px 25px;
-  margin: 15px 30px;
+  padding: 9px 3px;
+  margin: 15px 2px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -18,7 +18,25 @@
   font-size: 16px;
   color: #edf0f1;
   text-decoration: none;
-  width: 250px;
+}
+
+.dashboard table {
+  width: 100%;
+}
+
+.dashboard tr {
+  font-family: "Roboto Mono", monospace;
+}
+
+.dashboard td {
+  text-align: center;
+
+  color: gray;
+}
+
+.dashboard th {
+  font-family: "Roboto Mono", monospace;
+  color: rgb(87, 86, 86);
 }
 
 .dashboard h2 {

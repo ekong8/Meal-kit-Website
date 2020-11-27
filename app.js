@@ -7,6 +7,9 @@ const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const session = require("express-session")
+const fileUpload = require("express-fileupload")
+const methodOverride = require("method-override")
+const helpers = require("handlebars-helpers")()
 
 //set up dotenv
 const dotenv = require("dotenv")
@@ -17,6 +20,12 @@ const app = express()
 app.use(express.static("public"))
 //set up body parser
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(
+  methodOverride("_method", {
+    mmethods: ["GET", "POST"],
+  })
+)
+app.use(fileUpload())
 
 //set up handlebars
 app.engine(
@@ -24,6 +33,7 @@ app.engine(
   exphbs({
     extname: ".hbs",
     defaultLayout: "main",
+    helpers,
   })
 )
 
@@ -60,9 +70,11 @@ mongoose
 //set up router
 const generalRoute = require("./controllers/general")
 const userRoute = require("./controllers/user")
+const mealRoute = require("./controllers/mealkit")
 
 app.use("/", generalRoute)
 app.use("/user", userRoute)
+app.use("/mealkit", mealRoute)
 
 //set up PORT
 const HTTP_PORT = process.env.PORT

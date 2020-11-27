@@ -1,8 +1,63 @@
  <link rel="stylesheet" href="/css/dashboard.css">
-<div id="dash" class="dashboard">
-    <nav>
-        <button type="button" onclick="location.href='#'"> Add New Meal </button>
-        <button type="button" onclick="location.href='#'"> Edit A Meal List </button>
-    </nav>
+ <div id="dash" class="dashboard">
      <h2>Welcome Admin {{user.firstName}} {{user.lastName}}</h2> <br>
-</div>
+     <table>
+         <thead>
+             <tr>
+                 <th>Name</th>
+                 <th>Ingredients</th>
+                 <th>Category</th>
+                 <th>Price($)</th>
+                 <th>Top Menu</th>
+                 <th>Actions</th>
+             </tr>
+         </thead>
+         <tbody>
+             {{#if meals}}
+             {{#each meals}}
+             <tr>
+                 <td>{{name}}</td>
+                 <td>
+                     <div class="tooltip">Ingredients
+                         <div class="tooltip-text">{{included}}</div>
+                     </div>
+                 </td>
+                 <td>
+                     {{#if category}}
+                     {{category.displayName}}
+
+                     {{else}}
+                     None
+                     {{/if}}
+                 </td>
+
+
+                 <td>{{price}}</td>
+                 <td>
+                     <input type="checkbox" name="topmenu" {{#if topmenu}} checked {{/if}}disabled />
+                 </td>
+                 <td>
+                     <button type="button" onclick="location.href='/mealkit/edit/{{_id}}'"
+                         style="display: inline-block;">Edit</button>
+                     <form method="POST" action="/mealkit/{{_id}}?_method=DELETE" style="display: inline-block;">
+                         <button type="submit" style="margin-left: 4px; display:inline-block;">Delete</button>
+                     </form>
+                 </td>
+             </tr>
+             {{/each}}
+             {{else}}
+             <tr>
+                 <td colspan="6" style="text-align: center;">No meals found</td>
+             </tr>
+             {{/if}}
+         </tbody>
+         <tfoot>
+             <tr>
+                 <td colspan="5"></td>
+                 <td>
+                     <button type="button" onclick="location.href='/mealkit/create'" style="width: 65%;"> Add New Meal </button>
+                 </td>
+             </tr>
+         </tfoot>
+     </table>
+ </div>

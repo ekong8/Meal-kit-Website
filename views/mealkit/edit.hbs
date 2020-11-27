@@ -1,0 +1,160 @@
+<link rel="stylesheet" href="/css/registration.css">
+<div class="page-content">
+    <form class="signup-form" method="POST" action="/mealkit/{{_id}}?_method=PUT" enctype="multipart/form-data">
+        <h3>Edit Mealkit Information</h3>
+        <br>
+        <hr>
+        <br>
+        {{#gt err.other.length 0}}
+        <ul style="padding: 0 32px">
+            {{#each err.other}}
+            <li style="color: red; width:auto">{{this}}</li>
+            {{/each}}
+        </ul>
+        <br>
+        <hr>
+        {{/gt}}
+
+
+        <div class="input-group">
+            <label for="name">Title</label>
+            <div class="row-col-1">
+                <input name="name" type="text" value="{{name}}" required />
+                <div>
+                    {{#each err.name}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="included">What is included?</label>
+            <div class="row-col-1">
+                <input name="included" type="text" required value="{{included}}" />
+                <div>
+                    {{#each err.included}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="desc">Description</label>
+            <div class="row-col-1">
+                <input name="desc" type="text" required value="{{desc}}" />
+                <div>
+                    {{#each err.desc}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="category">Category</label>
+            <div class="row-col-1">
+                <select name="category" required />
+                <option value="">-Select-</option>
+                {{#each categories}}
+                <option value="{{name}}">{{displayName}}</option>
+                {{/each}}
+                </select>
+                <div>
+                    {{#each err.category}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="price">Price</label>
+            <div class="row-col-1">
+                <input name="price" type="text" value="{{price}}" required />
+                <div>
+                    {{#each err.price}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="cookingTime">Cooking Time</label>
+            <div class="row-col-1">
+                <input name="cookingTime" type="text" value="{{cookingTime}}" required />
+                <div>
+                    {{#each err.cookingTime}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="servings">Servings</label>
+            <div class="row-col-1">
+                <input name="servings" type="number" value={{servings}} required />
+                <div>
+                    {{#each err.servings}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="calories">Calories Per Serving</label>
+            <div class="row-col-1">
+                <input name="calories" type="text" value="{{calories}}" required />
+                <div>
+                    {{#each err.calories}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="topmenu">Is it a Top Meal?</label>
+            <div class="row-col-1">
+                <select name="topmenu" value="{{topmenu}}" required />
+                <option value="">-Select-</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                </select>
+                <div>
+                    {{#each err.topmenu}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="image">Picture</label>
+            <div class="row-col-1">
+                <input type="file" name="image" accept="image/*" required />
+                <div>
+                    {{#each err.img}}
+                    <div class="login-vdt">{{this}}</div>
+                    {{/each}}
+                </div>
+            </div>
+            {{#if pic}}
+            <br>
+            <hr>
+            <img src="/uploads/{{pic}}" width="100%" height="400" />
+            {{/if}}
+        </div>
+
+        <div class="row-col-2">
+            <button type="submit" value="Save" class="btn-primary">Save</button>
+            <form method="POST" action="/mealkit/{{_id}}?_method=DELETE">
+                <button type="submit" class="btn-primary">Delete</button>
+            </form>
+        </div>
+    </form>
+</div>

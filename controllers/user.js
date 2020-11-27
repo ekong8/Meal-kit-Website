@@ -3,6 +3,8 @@ const router = express.Router()
 const userModel = require("../models/User")
 const bcrypt = require("bcryptjs")
 const { isLoggedIn, isLoggedOut, isAdmin } = require("../middleware/user")
+const mealModel = require("../models/meal")
+const mealCategoryModel = require("../models/mealCategory")
 
 // Registor
 router.get("/registration", isLoggedOut, (req, res) => {
@@ -11,7 +13,7 @@ router.get("/registration", isLoggedOut, (req, res) => {
   })
 })
 
-router.post("/registration", isLoggedOut, (req, res) => {
+router.post("/registration", isLoggedOut, async (req, res) => {
   const { firstName, lastName, username, password, passwordConfirm } = req.body
   const errors = {
     fName: [],
@@ -57,21 +59,10 @@ router.post("/registration", isLoggedOut, (req, res) => {
     errors.passwordConfirm.push("Password is not the same.")
   }
   //check for username
-  userModel
-    .findOne({ username: req.body.username })
-    .then((user) => {
-      if (user !== null) {
-        errors.other.push("Duplicate username!")
-        res.render("user/login", {
-          username: username,
-          password: password,
-          errors,
-        })
-      }
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  const foundUser = await userModel.findOne({ username: req.body.username })
+  if (foundUser) {
+    errors.other.push("Duplicate username!")
+  }
 
   if (Object.values(errors).every((arr) => arr.length == 0)) {
     const user = new userModel({
@@ -259,9 +250,41 @@ router.get("/dashboard", isLoggedIn, (req, res) => {
   }
 })
 
-router.get("/dashboard/admin", isLoggedIn, isAdmin, (req, res) => {
+router.get("/dashboard/admin", isLoggedIn, isAdmin, async (req, res) => {
+  const meals = await mealModel.find({})
+  const formattedMeals = []
+
+  for (let m of meals) {
+    const foundCategory = await mealCategoryModel.findOne({
+      name: m.category,
+    })
+
+    const formatted = {
+      _id: m._id,
+      name: m.name,
+      included: m.included,
+      desc: m.desc,
+      category: foundCategory
+        ? {
+            _id: foundCategory._id,
+            name: foundCategory.name,
+            displayName: foundCategory.displayName,
+          }
+        : null,
+      price: m.price,
+      cookingTime: m.cookingTime,
+      servings: m.servings,
+      calories: m.calories,
+      topmenu: m.topmenu,
+      pic: m.pic,
+    }
+
+    formattedMeals.push(formatted)
+  }
+
   res.render("user/dashAdmin", {
     title: "Dashboard",
+    meals: formattedMeals,
   })
 })
 
