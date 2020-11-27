@@ -20,11 +20,14 @@ const app = express()
 app.use(express.static("public"))
 //set up body parser
 app.use(bodyParser.urlencoded({ extended: false }))
+//set up action path
 app.use(
   methodOverride("_method", {
     mmethods: ["GET", "POST"],
   })
 )
+
+//set up fileupload
 app.use(fileUpload())
 
 //set up handlebars

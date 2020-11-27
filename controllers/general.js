@@ -1,7 +1,5 @@
 const express = require("express")
 const router = express.Router()
-const path = require("path")
-const data = require("../models/data.js")
 const mealModel = require("../models/meal")
 const mealCategoryModel = require("../models/mealCategory")
 const _ = require("lodash")
