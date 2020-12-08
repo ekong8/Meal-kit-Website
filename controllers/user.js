@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs")
 const { isLoggedIn, isLoggedOut, isAdmin } = require("../middleware/user")
 const mealModel = require("../models/meal")
 const mealCategoryModel = require("../models/mealCategory")
+const cartModel = require("../models/cart")
 
 // Registor
 router.get("/registration", isLoggedOut, (req, res) => {
@@ -73,7 +74,9 @@ router.post("/registration", isLoggedOut, async (req, res) => {
     })
     user
       .save()
-      .then(() => {
+      .then(async () => {
+        await cartModel.create({ userId: user._id })
+
         //send email
         const sgMail = require("@sendgrid/mail")
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)

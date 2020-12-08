@@ -5,8 +5,10 @@ const path = require("path")
 const { isLoggedIn, isAdmin } = require("../middleware/user")
 const mealkitModel = require("../models/meal")
 const mealCategoryModel = require("../models/mealCategory")
+const cartModel = require("../models/cart")
 const fs = require("fs")
 
+//add meal
 router.get("/create", isAdmin, isLoggedIn, async (req, res) => {
   const categories = await mealCategoryModel.find({})
 
@@ -19,51 +21,7 @@ router.get("/create", isAdmin, isLoggedIn, async (req, res) => {
   })
 })
 
-router.get("/edit/:id", isAdmin, isLoggedIn, async (req, res) => {
-  try {
-    const meal = await mealkitModel.findById(req.params.id)
-    const {
-      _id,
-      name,
-      included,
-      desc,
-      category,
-      price,
-      cookingTime,
-      servings,
-      calories,
-      topmenu,
-      pic,
-    } = meal
-
-    const categories = await mealCategoryModel.find({})
-    const foundCategory = await mealCategoryModel.findOne({ name: category })
-    res.render("mealkit/edit", {
-      _id,
-      name,
-      included,
-      desc,
-      category: foundCategory ? foundCategory : null,
-      price,
-      cookingTime,
-      servings,
-      calories,
-      topmenu,
-      pic,
-      categories: categories.map((c) => ({
-        _id: c._id,
-        name: c.name,
-        displayName: c.displayName,
-      })),
-    })
-  } catch (err) {
-    res.render("general/error", {
-      title: `Error: meal ${_id}`,
-      message: `No matching meal with id ${_id} found.`,
-    })
-  }
-})
-
+//add meal
 router.post("/", isAdmin, isLoggedIn, async (req, res) => {
   const {
     name,
@@ -223,25 +181,52 @@ router.post("/", isAdmin, isLoggedIn, async (req, res) => {
   }
 })
 
-router.post("/category", async (req, res) => {
-  const { name, displayName } = req.body
-  if (!name || name.length === 0) {
-    res.status(400).send("Name is required.")
-    return
-  }
-
-  const newCategory = new mealCategoryModel({
-    name,
-    displayName: displayName ? displayName : name,
-  })
+//edit meal
+router.get("/edit/:id", isAdmin, isLoggedIn, async (req, res) => {
   try {
-    await newCategory.save()
-    res.sendStatus(201)
+    const meal = await mealkitModel.findById(req.params.id)
+    const {
+      _id,
+      name,
+      included,
+      desc,
+      category,
+      price,
+      cookingTime,
+      servings,
+      calories,
+      topmenu,
+      pic,
+    } = meal
+
+    const categories = await mealCategoryModel.find({})
+    const foundCategory = await mealCategoryModel.findOne({ name: category })
+    res.render("mealkit/edit", {
+      _id,
+      name,
+      included,
+      desc,
+      category: foundCategory ? foundCategory : null,
+      price,
+      cookingTime,
+      servings,
+      calories,
+      topmenu,
+      pic,
+      categories: categories.map((c) => ({
+        _id: c._id,
+        name: c.name,
+        displayName: c.displayName,
+      })),
+    })
   } catch (err) {
-    res.status(500).send("Failed to add new meal category.")
+    res.render("general/error", {
+      title: `Error: meal ${_id}`,
+      message: `No matching meal with id ${_id} found.`,
+    })
   }
 })
-
+//update edit meal
 router.put("/:id", isAdmin, isLoggedIn, async (req, res) => {
   const { id } = req.params
 
@@ -421,6 +406,26 @@ router.put("/:id", isAdmin, isLoggedIn, async (req, res) => {
   })
 })
 
+router.post("/category", async (req, res) => {
+  const { name, displayName } = req.body
+  if (!name || name.length === 0) {
+    res.status(400).send("Name is required.")
+    return
+  }
+
+  const newCategory = new mealCategoryModel({
+    name,
+    displayName: displayName ? displayName : name,
+  })
+  try {
+    await newCategory.save()
+    res.sendStatus(201)
+  } catch (err) {
+    res.status(500).send("Failed to add new meal category.")
+  }
+})
+
+//delete meal
 router.delete("/:id", isAdmin, isLoggedIn, async (req, res) => {
   try {
     await mealkitModel.deleteOne({ _id: req.params.id })
@@ -433,6 +438,7 @@ router.delete("/:id", isAdmin, isLoggedIn, async (req, res) => {
   }
 })
 
+//delete category
 router.delete("/category/:name", async (req, res) => {
   const { name } = req.params
   if (!name || name.length === 0) {

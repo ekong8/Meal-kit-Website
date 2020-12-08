@@ -33,7 +33,7 @@
         <div class="meals-box">
             <img src="/uploads/{{pic}}" alt="">
             <h3>{{name}}</h3>
-            <h4>${{price}}</h4>
+            <button type="button" onclick="location.href='/order/details/{{_id}}'">${{price}}</button>
             <p>{{included}}</p>
         </div>
         {{/each}}

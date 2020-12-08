@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/css/order.css">
+<div id="cart" class="details">
+    <div class="details-form">
+        <h2>Meal-kit in your cart, {{user.firstName}} {{user.lastName}}: </h2><br>
+        <hr>
+        {{#each meals}}
+        <p> {{meal.name}}</p><br>
+        <img src="/uploads/{{meal.pic}}" width="300" height="200" />
+        <p> Price: ${{meal.price}} </p>
+        <p>Quantity: {{quantity}}</p> <br>
+        <form method="POST" action="/order/cart/meal/{{meal._id}}?_method=DELETE" style="display: inline-block;">
+            <button type="submit" style="margin-left: 4px; margin-bottom:10px; display:inline-block;">Delete</button>
+        </form>
+        <hr>
+        <br>
+        {{else}}
+        Your cart is empty
+        {{/each}} <br> <br>
+        <p>Order total: {{totalPrice}}</p>
+        <br>
+        <b>
+            <form method="POST" action="/order/cart/checkout" style="display: inline-block">
+                <input type="submit" class="btn-primary" value="Check-out order" />
+            </form>
+        </b>
+    </div>
+</div>

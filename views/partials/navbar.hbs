@@ -8,6 +8,7 @@
     </nav>
     <div>
         {{#if user}}
+        <a href="/order/cart"><i class="fa fa-shopping-cart fa-2x" style="padding-right:15px;" aria-hidden="true"></i></a>
         <a href="/user/dashboard" class="dash-name">Hello, {{user.firstName}} {{user.lastName}}</a>
         <button type="button" onclick="location.href='/user/logout'" class="btn2">Logout</button>
         {{else}}

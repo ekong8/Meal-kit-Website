@@ -3,13 +3,12 @@
 // Section: NAA
 
 const express = require("express")
-const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
 const session = require("express-session")
 const fileUpload = require("express-fileupload")
 const methodOverride = require("method-override")
-const helpers = require("handlebars-helpers")()
+const viewEngine = require("./renderer")
 
 //set up dotenv
 const dotenv = require("dotenv")
@@ -31,14 +30,7 @@ app.use(
 app.use(fileUpload())
 
 //set up handlebars
-app.engine(
-  ".hbs",
-  exphbs({
-    extname: ".hbs",
-    defaultLayout: "main",
-    helpers,
-  })
-)
+app.engine(".hbs", viewEngine.engine)
 
 app.set("view engine", ".hbs")
 
@@ -74,10 +66,11 @@ mongoose
 const generalRoute = require("./controllers/general")
 const userRoute = require("./controllers/user")
 const mealRoute = require("./controllers/mealkit")
-
+const orderRoute = require("./controllers/order")
 app.use("/", generalRoute)
 app.use("/user", userRoute)
 app.use("/mealkit", mealRoute)
+app.use("/order", orderRoute)
 
 //set up PORT
 const HTTP_PORT = process.env.PORT

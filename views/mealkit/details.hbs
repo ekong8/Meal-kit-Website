@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/order.css">
+ <div id="details" class="details">
+    <form class="details-form" action="/order/cart?_method=PUT" method="post">
+            <h2>{{name}}</h2>
+            <br>
+            <hr>
+            <br>
+            <figure>
+                <img src="/uploads/{{pic}}" width="500" height="300">
+                <p>{{desc}}</p>
+                <p>Price: ${{price}}</p>
+                <p>Cooking Time: {{cookingTime}}min</p>
+                <p>Number of servings: {{servings}}</p>
+                <p>Calories per serving: {{calories}}cal</p>
+            </figure>
+        <br>
+        {{#if user}}
+        <label>Quantity</label>
+        <input type="number" placeholder="0" step="1" min="0" name="quantity" id="quantity"> <br>
+        <input type="hidden" name="mealId" value="{{_id}}" />
+        <input type="submit" class= "btn-primary" value="Add To Cart">
+        <input type="button" class="btn-primary" onclick="location.href='/menu'" value="Back to the menu">
+        {{/if}}
+    </form>
+</div>

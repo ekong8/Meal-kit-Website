@@ -50,5 +50,6 @@ userSchema.pre("save", function (next) {
       console.log(`Error occured when salting. ${err}`)
     })
 })
+
 const userModel = mongoose.model("Users", userSchema)
 module.exports = userModel

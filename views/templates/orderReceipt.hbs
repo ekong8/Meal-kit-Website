@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            --primary: #0275d8;
+            --success: #5cb85c;
+            --info: #5bc0de;
+            --warning: #f0ad4e;
+            --danger: #d9534f;
+            --dark: #292b2c;
+            --light: #f7f7f7;
+        }
+
+        .mail-content {
+            border: 1.5px solid lightgray;
+            border-radius: 5px;
+        }
+
+        .mail-title {
+            font-family: Arial;
+            text-align: center;
+            color: var(--success);
+        }
+
+        .mail-head {
+            font-family: Arial;
+            font-size: 20px;
+            text-align: center;
+            color: darkgray;
+        }
+
+        .mail-text {
+            color: lightgray;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .mail-btn {
+            display: block;
+            padding: 8px 12px;
+            background-color: var(--success);
+            border-radius: 4px;
+            color: var(--light);
+            text-decoration: none;
+            font-family: Arial;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px auto;
+            max-width: fit-content;
+        }
+
+        .mail-btn:hover {
+            filter: brightness(0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="mail-title">
+        Order Receipt
+    </h1>
+    <div class="mail-content">
+        <p class="mail-text">Order Date: {{createdAt}}</p>
+        <h3 class="mail-head">Hello, {{firstName}} {{lastName}} </h3><br>
+        <p class="mail-text">You are successfully ordered meal-kit!</p><br>
+        <hr><br>
+        <div class="mail-text">
+            {{#each details}}
+            <img src="https://ekong8.herokuapp.com/uploads/{{meal.pic}}" width="300" height="200" />
+            <p>{{meal.name}}</p>
+            <p>Price: ${{meal.price}}</p>
+            <p>Quantity: {{quantity}}</p>
+            {{/each}}
+            <p>Total: ${{totalPrice}}</p>
+        </div>
+    </div>
+</body>
+
+</html>
