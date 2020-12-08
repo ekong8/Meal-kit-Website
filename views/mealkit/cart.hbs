@@ -13,10 +13,10 @@
         </form>
         <hr>
         <br>
-        {{else}}
+        {{else}}<br>
         Your cart is empty
         {{/each}} <br> <br>
-        <p>Order total: {{totalPrice}}</p>
+        <p>Order total: ${{totalPrice}}</p>
         <br>
         <b>
             <form method="POST" action="/order/cart/checkout" style="display: inline-block">
