@@ -37,20 +37,30 @@ router.get("/cart", isLoggedIn, async (req, res) => {
     .findOne({ userId: req.session.user._id })
     .populate("meals.meal")
     .exec()
+  if (!userCart) {
+    userCart = await cartModel.create({ userId: req.session.user._id })
+  }
 
-  const totalPrice = userCart.meals.reduce(
-    (prev, m) => prev + m.meal.price * m.quantity,
-    0
-  )
+  try {
+    const totalPrice = userCart.meals.reduce(
+      (prev, m) => prev + m.meal.price * m.quantity,
+      0
+    )
 
-  res.render("mealkit/cart", {
-    ...userCart.toObject(),
-    totalPrice: Math.round((totalPrice + Number.EPSILON) * 100) / 100,
-  })
+    res.render("mealkit/cart", {
+      ...userCart.toObject(),
+      totalPrice: Math.round((totalPrice + Number.EPSILON) * 100) / 100,
+    })
+  } catch (err) {
+    res.render("general/error", {
+      title: "Failed to Add to Cart",
+      message: `Can not go to cart${err}`,
+    })
+  }
 })
 
 router.put("/cart", isLoggedIn, async (req, res) => {
-  const { mealId, quantity, totalPrice } = req.body
+  const { mealId, quantity } = req.body
 
   if (!mealId || !(await mealkitModel.findById(mealId))) {
     res.render("general/error", {
@@ -73,6 +83,9 @@ router.put("/cart", isLoggedIn, async (req, res) => {
     .findOne({ userId: req.session.user._id })
     .populate("meals.meal")
     .exec()
+  if (!userCart) {
+    userCart = await cartModel.create({ userId: req.session.user._id })
+  }
   try {
     let newMeals = [...userCart.meals]
     const existingMealIdx = userCart.meals.findIndex(
@@ -98,65 +111,61 @@ router.put("/cart", isLoggedIn, async (req, res) => {
 })
 
 router.post("/cart/checkout", isLoggedIn, async (req, res) => {
-  const userCart = await cartModel
+  let userCart = await cartModel
     .findOne({ userId: req.session.user._id })
     .populate("meals.meal")
-  if (userCart) {
-    try {
-      const order = await orderModel.create({
-        userId: userCart.userId,
-        details: userCart.meals.map((m) => ({
-          meal: m.meal._id,
-          quantity: m.quantity,
-        })),
-        totalPrice: userCart.meals.reduce(
-          (prev, m) => prev + m.meal.price * m.quantity,
-          0
-        ),
-      })
+  if (!userCart) {
+    userCart = await cartModel.create({ userId: req.session.user._id })
+  }
+  try {
+    const order = await orderModel.create({
+      userId: userCart.userId,
+      details: userCart.meals.map((m) => ({
+        meal: m.meal._id,
+        quantity: m.quantity,
+      })),
+      totalPrice: userCart.meals.reduce(
+        (prev, m) => prev + m.meal.price * m.quantity,
+        0
+      ),
+    })
 
-      await userCart.updateOne({
-        meals: [],
-      })
+    await userCart.updateOne({
+      meals: [],
+    })
 
-      const newOrder = await orderModel
-        .findById(order._id)
-        .populate("details.meal")
-      const { username, firstName, lastName } = req.session.user
-      const formattedOrder = {
-        ...newOrder.toObject(),
-        totalPrice:
-          Math.round((newOrder.totalPrice + Number.EPSILON) * 100) / 100,
-        createdAt: newOrder.createdAt.toLocaleString(),
-      }
-
-      const msg = {
-        to: username,
-        from: "ekong8@myseneca.ca",
-        subject: "K-Food Order Receipt",
-        html: await viewEngine.render(
-          __dirname + "/../views/templates/orderReceipt.hbs",
-          {
-            username,
-            firstName,
-            lastName,
-            ...formattedOrder,
-          }
-        ),
-      }
-      await sgMail.send(msg)
-
-      res.render("mealkit/confirm")
-    } catch (err) {
-      res.render("general/error", {
-        title: "Failed to Checkout Cart",
-        message: `An error occured while processing your cart. (${err})`,
-      })
+    const newOrder = await orderModel
+      .findById(order._id)
+      .populate("details.meal")
+    const { username, firstName, lastName } = req.session.user
+    const formattedOrder = {
+      ...newOrder.toObject(),
+      totalPrice:
+        Math.round((newOrder.totalPrice + Number.EPSILON) * 100) / 100,
+      createdAt: newOrder.createdAt.toLocaleString(),
     }
-  } else {
+
+    const msg = {
+      to: username,
+      from: "ekong8@myseneca.ca",
+      subject: "K-Food Order Receipt",
+      html: await viewEngine.render(
+        __dirname + "/../views/templates/orderReceipt.hbs",
+        {
+          username,
+          firstName,
+          lastName,
+          ...formattedOrder,
+        }
+      ),
+    }
+    await sgMail.send(msg)
+
+    res.render("mealkit/confirm")
+  } catch (err) {
     res.render("general/error", {
       title: "Failed to Checkout Cart",
-      message: `Cart is invalid`,
+      message: `An error occured while processing your cart. (${err})`,
     })
   }
 })
@@ -164,6 +173,9 @@ router.post("/cart/checkout", isLoggedIn, async (req, res) => {
 //delete cart
 router.delete("/cart/meal/:id", isLoggedIn, async (req, res) => {
   let userCart = await cartModel.findOne({ userId: req.session.user._id })
+  if (!userCart) {
+    userCart = await cartModel.create({ userId: req.session.user._id })
+  }
 
   try {
     const updatedMeals = userCart.meals.filter((m) => m.meal != req.params.id)
