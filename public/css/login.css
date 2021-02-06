@@ -4,7 +4,7 @@
 }
 
 .login-vdt {
-  color: #e96969e7;
+  color: #1e925ce7;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   font-weight: bolder;
@@ -41,7 +41,7 @@
 }
 
 .signIn a {
-  color: #e96969e7;
+  color: #1e925ce7;
   font-weight: 600;
   font-size: 0.9em;
 }
@@ -86,7 +86,7 @@ select {
 }
 
 .btn-primary {
-  background-color: #e96969e7;
+  background-color: #1e925ce7;
   border: none;
   color: #ffffff;
   font-size: 20px;

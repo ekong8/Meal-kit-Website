@@ -47,13 +47,13 @@ header {
   font-family: "Montez", cursive;
   font-weight: 500;
   font-size: 35px;
-  color: #e96969e7;
+  color: #1e925ce7;
   text-decoration: none;
   transition: all 0.3s ease 0s;
 }
 
 .logo:hover {
-  color: #af0707e7;
+  color: #0c7243e7;
 }
 
 .nav-links {
@@ -66,13 +66,13 @@ header {
 }
 
 .nav-links li a {
-  color: #e96969e7;
+  color: #1e925ce7;
   transition: all 0.3s ease 0s;
   text-decoration: none;
 }
 
 .nav-links li a:hover {
-  color: #e96969e7;
+  color: #0c7243e7;
 }
 
 button {
@@ -81,24 +81,24 @@ button {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease 0s;
-  background-color: #e96969e7;
+  background-color: #1e925ce7;
 }
 
 .btn2 {
   background-color: transparent;
-  border: solid #e96969e7;
-  border-color: #e96969e7;
-  color: #e96969e7;
+  border: solid #1e925ce7;
+  border-color: #1e925ce7;
+  color: #1e925ce7;
 }
 
 .btn2:hover {
-  background-color: #e96969e7;
+  background-color: #1e925ce7;
   color: white;
 }
 
 button:hover {
   background-color: white;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .hero {
@@ -115,7 +115,7 @@ button:hover {
 .hero h1 {
   font-size: 3em;
   text-align: center;
-  color: rgb(197, 82, 82);
+  color: #1e925ce7;
   background-color: aliceblue;
   opacity: 0.7;
 }
@@ -143,7 +143,7 @@ button:hover {
 
 .cta button:hover {
   background-color: white;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 /* Menu */
@@ -212,14 +212,14 @@ main button {
   margin: 0 auto;
   text-align: center;
   background-color: transparent;
-  border: solid #e96969e7;
-  color: #e96969e7;
+  border: solid #1e925ce7;
+  color: #1e925ce7;
   opacity: 0.8;
   border-radius: 5px;
 }
 
 main button:hover {
-  background-color: #e96969e7;
+  background-color: #0c7243e7;
   color: white;
 }
 
@@ -239,7 +239,7 @@ main {
   font-size: 3em;
   color: 166e82;
   font-family: "Roboto Mono", monospace;
-  background-color: #fda5a569;
+  background-color: #3db87ee7;
   color: white;
   width: 100%;
   margin: 30px auto 20px;
@@ -266,7 +266,7 @@ main {
 .top-meal-menu .meal-box h4 {
   padding: 20px 0;
   font-family: "Monserrat", sans-serif;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .meals-box p {
@@ -304,7 +304,7 @@ footer .footer {
 
 .footer h3 {
   padding: 20px 0;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .footer p {
@@ -438,7 +438,7 @@ footer .icons {
   }
   .footer h3 {
     padding-left: 30px;
-    color: #e96969e7;
+    color: #1e925ce7;
   }
 
   .footer p {

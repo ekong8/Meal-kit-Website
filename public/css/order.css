@@ -21,7 +21,7 @@
 .details h2 {
   font-family: "Roboto Mono", monospace;
   font-weight: bolder;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .details p {
@@ -47,7 +47,7 @@ select {
 }
 
 .btn-primary {
-  background-color: #e96969e7;
+  background-color: #1e925ce7;
   border: none;
   border-radius: 10px;
   color: #ffffff;

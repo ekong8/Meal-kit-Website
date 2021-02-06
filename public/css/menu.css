@@ -1,9 +1,9 @@
 .title h2 {
   font-size: 2em;
   font-family: "Roboto Mono", monospace;
-  color: rgba(160, 44, 44, 0.788);
+  color: #1f8354e7;
   font-weight: bold;
-  background-color: rgba(255, 159, 142, 0.295);
+  background-color: #3db87ee7;
   opacity: 0.7;
 }
 
@@ -47,12 +47,12 @@ main {
 }
 
 .meals-box h3 {
-  color: #520b4c;
+  color: #165035e7;
   padding: 10px 0;
 }
 
 .meals-box h4 {
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .meals-box p {

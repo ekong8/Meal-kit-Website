@@ -49,7 +49,7 @@
 .email h2 {
   font-family: "Roboto Mono", monospace;
   font-weight: bolder;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
 
 .email p {
@@ -99,7 +99,7 @@ input {
 }
 
 .btn-primary {
-  background-color: #e96969e7;
+  background-color: #1e925ce7;
   border: none;
   color: #ffffff;
   font-size: 20px;

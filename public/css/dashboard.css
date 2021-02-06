@@ -12,7 +12,7 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  background-color: #f7adade7;
+  background-color: #6dcca0e7;
   font-family: "Monserrat", sans-serif;
   font-weight: 500;
   font-size: 16px;
@@ -42,5 +42,5 @@
 .dashboard h2 {
   font-family: "Roboto Mono", monospace;
   font-weight: bolder;
-  color: #e96969e7;
+  color: #1e925ce7;
 }
